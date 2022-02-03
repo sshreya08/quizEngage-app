@@ -1,0 +1,49 @@
+<div class="mainbody">
+  <div class="myH1">
+    <h1>Question: Difficulty level is {{ level | uppercase }}</h1>
+    <div class="myH1-content">
+      <form [formGroup]="form" (ngSubmit)="onSumbitOption()">
+        <div class="form-group">
+          <mat-spinner
+            class="spinner"
+            *ngIf="isLoading | async; else quizQuestion"
+            diameter="60"
+          ></mat-spinner>
+          <ng-template #quizQuestion>
+            <label for="level">{{ question.text }}</label>
+            <div
+              class="input-container"
+              *ngFor="let option of question.options"
+            >
+              <input
+                id="'option.id'"
+                type="radio"
+                [value]="option.id"
+                (change)="handleChange(option)"
+                name="level"
+                formControlName="level"
+              />
+              <label for="'option.id'">{{ option.label }}</label>
+            </div>
+            <div class="button-action">
+              <button [disabled]="!form.valid">Submit</button>
+              <button [disabled]="!submitted" (click)="nextQuestion()">
+                Next Question
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </form>
+      <div *ngIf="rightAnswer; else wrongAnswer">
+        Yayyy!! Correct answer. Your total point is {{ totalPoints }}
+      </div>
+      <ng-template #wrongAnswer>
+        <div *ngIf="submitted">
+          Oops!! Your answer is incorrect. Right answer is
+          <strong> {{ correctAnswer }}</strong> . Your total point is still
+          {{ totalPoints }}
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

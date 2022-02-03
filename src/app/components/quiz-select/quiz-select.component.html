@@ -1,0 +1,45 @@
+<div class="mainbody">
+  <div class="myH1">
+    <h1>Quiz</h1>
+    <div class="myH1-content">
+      <form [formGroup]="form" (ngSubmit)="onStartquiz()">
+        <div class="form-group">
+          <label for="level">Select difficulty level:</label>
+          <div class="form-container">
+            <input
+              id="easy"
+              type="radio"
+              value="easy"
+              name="level"
+              formControlName="level"
+            />
+            <label for="easy">Easy</label>
+          </div>
+
+          <div class="form-container">
+            <input
+              id="medium"
+              type="radio"
+              value="medium"
+              name="level"
+              formControlName="level"
+            />
+            <label for="medium">Medium</label>
+          </div>
+
+          <div class="form-container">
+            <input
+              id="hard"
+              type="radio"
+              value="hard"
+              name="level"
+              formControlName="level"
+            />
+            <label for="hard">Hard</label>
+          </div>
+          <button [disabled]="!form.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
